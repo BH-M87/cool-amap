@@ -1,0 +1,32 @@
+{
+  "name": "cool-amap",
+  "version": "0.0.1",
+  "description": "AMAP, use React Hook with Declarative Programming.",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "authors": {
+    "name": "Xuheng Liu",
+    "email": "liuxuheng1990@gmail.com"
+  },
+  "repository": "https://github.com/BH-M87/cool-amap",
+  "scripts": {
+    "dev": "father doc dev",
+    "build": "father build"
+  },
+  "peerDependencies": {
+    "prop-types": "15.x",
+    "react": "16.x",
+    "react-dom": "16.x"
+  },
+  "devDependencies": {
+    "father": "^2.16.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "dependencies": {
+    "cool-utils": "^0.2.6",
+    "lodash-es": "^4.17.15"
+  },
+  "license": "MIT"
+}
