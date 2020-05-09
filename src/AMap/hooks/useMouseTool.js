@@ -6,6 +6,9 @@ export default ({ mapRef, drawType, drawOption, onDraw, onAdjust, onSelection })
   const result = useRef({});
   const overlayRef = useRef([]);
   useEffect(() => {
+    if (!window.AMap.MouseTool) {
+      return;
+    }
     mouseTool.current = new window.AMap.MouseTool(mapRef.current);
     mouseTool.current.on('draw', function(e) {
       const { obj } = e;
@@ -28,10 +31,7 @@ export default ({ mapRef, drawType, drawOption, onDraw, onAdjust, onSelection })
       overlayRef.current.push(obj);
     });
   }, [mapRef, onAdjust, onDraw]);
-  console.log(drawType, drawOption);
   useCompare(drawType, drawOption, (_drawType, _drawOption) => {
-    console.log(_drawType, _drawOption);
-    
     if (_drawType === null) {
       mouseTool.current.close(true);
       result.current = {};

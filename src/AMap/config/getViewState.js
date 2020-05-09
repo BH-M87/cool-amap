@@ -1,11 +1,14 @@
+import { omit } from 'lodash-es';
+
 export const initViewState = {
-  longitude: 106.478932,
-  latitude: 29.515169,
-  zoom: 18,
-  minZoom: 17,
+  longitude: 119.69,
+  latitude: 29.99,
+  zoom: 8,
+  minZoom: 6,
   maxZoom: 20,
   pitch: 50,
 };
+
 // Adapt to Amap
 export default (_viewState = {}) => {
   const viewState = {
@@ -18,5 +21,6 @@ export default (_viewState = {}) => {
     zoom: viewState.zoom,
     zooms: [viewState.minZoom, viewState.maxZoom],
     pitch: viewState.pitch,
+    ...omit(_viewState, ['longitude', 'latitude', 'zoom', 'minZoom', 'maxZoom', 'pitch']),
   };
 };

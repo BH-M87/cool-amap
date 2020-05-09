@@ -66,6 +66,7 @@ AMap.propTypes = {
     maxZoom: PropTypes.number,
     pitch: PropTypes.number,
     cursorType: PropTypes.oneOf(['pointer', 'default', 'move', 'crosshair']),
+    viewMode: PropTypes.oneOf(['3D', '2D']),
   }),
   markerConfigs: PropTypes.arrayOf(
     PropTypes.shape({
