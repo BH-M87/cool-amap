@@ -20,7 +20,6 @@ export default (mapRef, mapContainer, viewState, mapEvents, options = {}) => {
     // eslint-disable-next-line no-param-reassign
     mapRef.current = new window.AMap.Map(mapContainer, {
       ...DEFAULT_MAP_STATUS,
-      mapStyle: 'amap://styles/0c23582a0b357aa7a7c53743052b3482',
       expandZoomRange: true,
       ...getViewState(viewState),
       ...options,

@@ -3,10 +3,10 @@ import { omit } from 'lodash-es';
 export const initViewState = {
   longitude: 119.69,
   latitude: 29.99,
-  zoom: 8,
+  zoom: 14,
   minZoom: 6,
   maxZoom: 20,
-  pitch: 50,
+  pitch: 0,
 };
 
 // Adapt to Amap

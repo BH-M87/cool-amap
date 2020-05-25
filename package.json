@@ -10,6 +10,7 @@
   },
   "repository": "https://github.com/BH-M87/cool-amap",
   "scripts": {
+    "start": "npm run dev",
     "dev": "father doc dev",
     "build": "father build"
   },
