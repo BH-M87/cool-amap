@@ -1,5 +1,4 @@
 import AMap from '../';
-import mockMarkersPosition from '../utils/mockMarkersPosition';
 
 const AmapExample = () => {
   return (
@@ -11,6 +10,12 @@ const AmapExample = () => {
           fillColor: '#00b0ff',
           strokeColor: '#80d8ff',
           //同Polygon的Option设置
+        }}
+        onDraw={(target, event) => {
+          console.log(target, event, target.getPath(), target.getArea());
+        }}
+        onAdjust={(target, event) => {
+          console.log(target, event, target.getPath(), target.getArea());
         }}
       />
     </div>
