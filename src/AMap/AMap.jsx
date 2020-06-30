@@ -13,6 +13,7 @@ const mapContainer = 'map-container';
 // const { 'map-container': mapContainer } = styles;
 
 export default function AMap({
+  loadOptions,
   className,
   style,
   options,
@@ -29,7 +30,7 @@ export default function AMap({
   markerEvents,
   getMapInstance,
 }) {
-  const mapInstance = useMapInit(mapContainer, viewState, mapEvents, options);
+  const mapInstance = useMapInit(loadOptions, mapContainer, viewState, mapEvents, options);
   useEffect(() => {
     if (mapInstance && getMapInstance) {
       getMapInstance(mapInstance);
@@ -53,6 +54,11 @@ export default function AMap({
 }
 
 AMap.propTypes = {
+  loadOptions: PropTypes.shape({
+    key:PropTypes.string, // key for AMap JS SDK
+    version: PropTypes.string, //JSAPI 版本号
+    plugins: PropTypes.arrayOf(PropTypes.string), //同步加载的插件列表
+  }),
   options: PropTypes.object,
   // eslint-disable-next-line react/forbid-prop-types
   style: PropTypes.object,
@@ -159,4 +165,4 @@ AMap.propTypes = {
   // ),
 };
 
-AMap.defaultProps = { options: {}, className: '', mapEvents: {}, markerEvents: {} };
+AMap.defaultProps = { loadOptions: {}, options: {}, className: '', mapEvents: {}, markerEvents: {} };
