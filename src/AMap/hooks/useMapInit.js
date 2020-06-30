@@ -37,17 +37,4 @@ export default (mapContainer, viewState, mapEvents, options = {}) => {
       });
   }, []);
   return mapInstance;
-  // useEffect(() => {
-  //   if (mapInstance) {
-  //     return;
-  //   }
-  //   // eslint-disable-next-line no-param-reassign
-  //   mapInstance = new window.AMap.Map(mapContainer, {
-  //     ...DEFAULT_MAP_STATUS,
-  //     expandZoomRange: true,
-  //     ...getViewState(viewState),
-  //     ...options,
-  //   });
-  //   addEvents(mapInstance, mapEvents);
-  // }, [mapContainer, mapEvents, mapRef, viewState]);
 };

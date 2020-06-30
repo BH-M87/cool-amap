@@ -6,6 +6,7 @@ import usePolygons from './hooks/usePolygons';
 import useMapInit from './hooks/useMapInit';
 import useViewState from './hooks/useViewState';
 import useMouseTool from './hooks/useMouseTool';
+import drawTypeEnums from './config/drawTypeEnums';
 import './AMap.css';
 
 const mapContainer = 'map-container';
@@ -30,11 +31,10 @@ export default function AMap({
 }) {
   const mapInstance = useMapInit(mapContainer, viewState, mapEvents, options);
   useEffect(() => {
-    if (getMapInstance) {
+    if (mapInstance && getMapInstance) {
       getMapInstance(mapInstance);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [mapInstance, getMapInstance]);
   useCompare(mapStatus, _mapStatus => {
     mapInstance.setStatus(_mapStatus);
   });
@@ -106,15 +106,7 @@ AMap.propTypes = {
       rotateEnable: PropTypes.bool,
     }),
   ]),
-  drawType: PropTypes.oneOf([
-    'marker',
-    'polyline',
-    'polygon',
-    'rectangle',
-    'circle',
-    undefined, // stop draw but leave the overlay there
-    null, // clear all overlays
-  ]),
+  drawType: PropTypes.oneOf(drawTypeEnums),
   // eslint-disable-next-line react/forbid-prop-types
   drawOption: PropTypes.object,
   onDraw: PropTypes.func,
