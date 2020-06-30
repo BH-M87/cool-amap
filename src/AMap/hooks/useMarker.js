@@ -4,10 +4,13 @@ import { isEqual } from 'lodash-es';
 import { useDifferentiation } from 'cool-utils';
 import addEvents from '../utils/addEvents';
 
-export default (mapRef, markerConfigs, markerEvents = {}) => {
+export default (mapInstance, markerConfigs, markerEvents = {}) => {
   const markersRef = useRef([]);
   const { added, removed } = useDifferentiation(markerConfigs);
   useEffect(() => {
+    if (!mapInstance) {
+      return;
+    }
     // no change, return
     if (added.length === 0 && removed.length === 0) {
       return;
@@ -17,7 +20,7 @@ export default (mapRef, markerConfigs, markerEvents = {}) => {
     markersRef.current.forEach(item => {
       const { data, instance } = item;
       if (removed.find(value => isEqual(value, data))) {
-        mapRef.current.remove(instance);
+        mapInstance.remove(instance);
       } else {
         remainmarkers.push(item);
       }
@@ -36,12 +39,12 @@ export default (mapRef, markerConfigs, markerEvents = {}) => {
           ? { offset: new window.AMap.Pixel(...markerConfig.offset) }
           : {}),
       });
-      mapRef.current.add(instance);
+      mapInstance.add(instance);
       markersRef.current.push({
         data: markerConfig,
         instance,
       });
       addEvents(instance, markerEvents);
     });
-  }, [added, added.length, markerConfigs, mapRef, removed, removed.length, markerEvents]);
+  }, [added, added.length, markerConfigs, mapInstance, removed, removed.length, markerEvents]);
 };

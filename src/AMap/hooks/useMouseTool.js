@@ -1,21 +1,24 @@
 import { useEffect, useRef } from 'react';
 import { useCompare } from 'cool-utils';
 
-export default ({ mapRef, drawType, drawOption, onDraw, onAdjust, onSelection }) => {
+export default ({ mapInstance, drawType, drawOption, onDraw, onAdjust, onSelection }) => {
   const mouseTool = useRef(null);
   const result = useRef({});
   const overlayRef = useRef([]);
   useEffect(() => {
+    if (!mapInstance) {
+      return;
+    }
     if (!window.AMap.MouseTool) {
       return;
     }
-    mouseTool.current = new window.AMap.MouseTool(mapRef.current);
+    mouseTool.current = new window.AMap.MouseTool(mapInstance);
     mouseTool.current.on('draw', function(e) {
       const { obj } = e;
       if (onDraw) {
         onDraw(e);
       }
-      const editor = new window.AMap.PolyEditor(mapRef.current, obj);
+      const editor = new window.AMap.PolyEditor(mapInstance, obj);
       // eslint-disable-next-line no-underscore-dangle
       result.current[obj._amap_id] = { editor, path: obj.getPath(), target: obj };
       editor.on('adjust', function(event) {
@@ -30,7 +33,7 @@ export default ({ mapRef, drawType, drawOption, onDraw, onAdjust, onSelection })
       editor.open();
       overlayRef.current.push(obj);
     });
-  }, [mapRef, onAdjust, onDraw]);
+  }, [mapInstance, onAdjust, onDraw]);
   useCompare(drawType, drawOption, (_drawType, _drawOption) => {
     if (_drawType === null) {
       mouseTool.current.close(true);

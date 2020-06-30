@@ -2,10 +2,13 @@ import { useRef, useEffect } from 'react';
 import { isEqual } from 'lodash-es';
 import { useDifferentiation } from 'cool-utils';
 
-export default (mapRef, polygonConfigs) => {
+export default (mapInstance, polygonConfigs) => {
   const overlayRef = useRef([]);
   const { added, removed } = useDifferentiation(polygonConfigs);
   useEffect(() => {
+    if (!mapInstance) {
+      return;
+    }
     // no change, return
     if (added.length === 0 && removed.length === 0) {
       return;
@@ -15,7 +18,7 @@ export default (mapRef, polygonConfigs) => {
     overlayRef.current.forEach(item => {
       const { data, instance } = item;
       if (removed.find(value => isEqual(value, data))) {
-        mapRef.current.remove(instance);
+        mapInstance.remove(instance);
       } else {
         remainpolygons.push(item);
       }
@@ -32,11 +35,11 @@ export default (mapRef, polygonConfigs) => {
         ...polygonConfig,
         path: polygonConfig.path,
       });
-      mapRef.current.add(instance);
+      mapInstance.add(instance);
       overlayRef.current.push({
         data: polygonConfig,
         instance,
       });
     });
-  }, [added, added.length, polygonConfigs, mapRef, removed, removed.length]);
+  }, [added, added.length, polygonConfigs, mapInstance, removed, removed.length]);
 };

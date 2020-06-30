@@ -1,30 +1,33 @@
 import { useEffect } from 'react';
 
-export default (mapRef, {
+export default (mapInstance, {
  longitude, latitude, zoom, pitch, cursorType 
 } = {}) => {
   useEffect(() => {
+    if (!mapInstance) {
+      return;
+    }
     if (!longitude || !latitude) {
       return;
     }
-    mapRef.current.panTo([longitude, latitude]);
-  }, [longitude, latitude, mapRef]);
+    mapInstance.panTo([longitude, latitude]);
+  }, [longitude, latitude, mapInstance]);
   useEffect(() => {
     if (!zoom) {
       return;
     }
-    mapRef.current.setZoom(zoom);
-  }, [zoom, mapRef]);
+    mapInstance.setZoom(zoom);
+  }, [zoom, mapInstance]);
   useEffect(() => {
     if (!pitch) {
       return;
     }
-    mapRef.current.setPitch(pitch);
-  }, [pitch, mapRef]);
+    mapInstance.setPitch(pitch);
+  }, [pitch, mapInstance]);
   useEffect(() => {
     if (!cursorType) {
       return;
     }
-    mapRef.current.setDefaultCursor(cursorType);
-  }, [cursorType, mapRef]);
+    mapInstance.setDefaultCursor(cursorType);
+  }, [cursorType, mapInstance]);
 };

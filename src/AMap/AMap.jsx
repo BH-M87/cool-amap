@@ -28,22 +28,21 @@ export default function AMap({
   markerEvents,
   getMapInstance,
 }) {
-  const mapRef = useRef(null);
-  useMapInit(mapRef, mapContainer, viewState, mapEvents, options);
+  const mapInstance = useMapInit(mapContainer, viewState, mapEvents, options);
   useEffect(() => {
     if (getMapInstance) {
-      getMapInstance(mapRef.current);
+      getMapInstance(mapInstance);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useCompare(mapStatus, _mapStatus => {
-    mapRef.current.setStatus(_mapStatus);
+    mapInstance.setStatus(_mapStatus);
   });
-  useViewState(mapRef, viewState);
-  useMarker(mapRef, markerConfigs, markerEvents);
-  usePolygons(mapRef, polygonConfigs);
+  useViewState(mapInstance, viewState);
+  useMarker(mapInstance, markerConfigs, markerEvents);
+  usePolygons(mapInstance, polygonConfigs);
   useMouseTool({
-    mapRef,
+    mapInstance,
     drawType,
     drawOption,
     onDraw,
