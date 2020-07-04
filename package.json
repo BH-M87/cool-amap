@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@amap/amap-jsapi-loader": "^0.0.1",
-    "cool-utils": "^0.2.6",
+    "cool-utils": "^1.0.0",
     "lodash-es": "^4.17.15"
   },
   "license": "MIT"
