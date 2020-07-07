@@ -3,12 +3,15 @@ import { isEqual } from 'lodash-es';
 import { useDifferentiation } from 'cool-utils';
 
 export default (mapInstance, polygonConfigs) => {
+  const isFirstPaint = useRef(true);
   const overlayRef = useRef([]);
-  const { added, removed } = useDifferentiation(polygonConfigs);
+  const { added: _added, removed } = useDifferentiation(polygonConfigs);
+  const added = isFirstPaint.current ? polygonConfigs : _added;
   useEffect(() => {
     if (!mapInstance) {
       return;
     }
+    isFirstPaint.current = false;
     // no change, return
     if (added.length === 0 && removed.length === 0) {
       return;
@@ -33,7 +36,6 @@ export default (mapInstance, polygonConfigs) => {
         fillColor: '#ffffff',
         fillOpacity: 0.15,
         ...polygonConfig,
-        path: polygonConfig.path,
       });
       mapInstance.add(instance);
       overlayRef.current.push({

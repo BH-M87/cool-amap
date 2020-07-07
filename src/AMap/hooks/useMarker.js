@@ -5,12 +5,15 @@ import { useDifferentiation } from 'cool-utils';
 import addEvents from '../utils/addEvents';
 
 export default (mapInstance, markerConfigs, markerEvents = {}) => {
+  const isFirstPaint = useRef(true);
   const markersRef = useRef([]);
-  const { added, removed } = useDifferentiation(markerConfigs);
+  const { added: _added, removed } = useDifferentiation(markerConfigs);
+  const added = isFirstPaint.current ? markerConfigs : _added;
   useEffect(() => {
     if (!mapInstance) {
       return;
     }
+    isFirstPaint.current = false;
     // no change, return
     if (added.length === 0 && removed.length === 0) {
       return;
