@@ -13,18 +13,27 @@ export default (mapInstance, {
     mapInstance.panTo([longitude, latitude]);
   }, [longitude, latitude, mapInstance]);
   useEffect(() => {
+    if (!mapInstance) {
+      return;
+    }
     if (!zoom) {
       return;
     }
     mapInstance.setZoom(zoom);
   }, [zoom, mapInstance]);
   useEffect(() => {
+    if (!mapInstance) {
+      return;
+    }
     if (!pitch) {
       return;
     }
     mapInstance.setPitch(pitch);
   }, [pitch, mapInstance]);
   useEffect(() => {
+    if (!mapInstance) {
+      return;
+    }
     if (!cursorType) {
       return;
     }

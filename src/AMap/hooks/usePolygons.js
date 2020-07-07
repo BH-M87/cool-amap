@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import { isEqual } from 'lodash-es';
 import { useDifferentiation } from 'cool-utils';
 
-export default (mapInstance, polygonConfigs) => {
+export default (mapInstance, polygonConfigs = []) => {
   const isFirstPaint = useRef(true);
   const overlayRef = useRef([]);
   const { added: _added, removed } = useDifferentiation(polygonConfigs);

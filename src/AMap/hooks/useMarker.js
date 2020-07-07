@@ -4,7 +4,7 @@ import { isEqual } from 'lodash-es';
 import { useDifferentiation } from 'cool-utils';
 import addEvents from '../utils/addEvents';
 
-export default (mapInstance, markerConfigs, markerEvents = {}) => {
+export default (mapInstance, markerConfigs = [], markerEvents = {}) => {
   const isFirstPaint = useRef(true);
   const markersRef = useRef([]);
   const { added: _added, removed } = useDifferentiation(markerConfigs);
