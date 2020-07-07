@@ -1,6 +1,6 @@
 {
   "name": "cool-amap",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "AMAP, use React Hook with Declarative Programming.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
